@@ -4,19 +4,21 @@
     "description": "",
     "main": "main.js",
     "dependencies": {
-        "dotenv": "^10.0.0",
-        "axios": "^1.4.0",
-        "moment-timezone": "^0.5.40",
-        "node-schedule": "^2.1.0",
-        "qrcode-terminal": "^0.12.0",
-        "whatsapp-web.js": "^1.25.0",
-        "puppeteer": "^22.8.2",
-        "chrome-aws-lambda": "^10.0.0"
+      "dotenv": "^10.0.0",
+      "axios": "^1.4.0",
+      "moment-timezone": "^0.5.40",
+      "node-schedule": "^2.1.0",
+      "qrcode-terminal": "^0.12.0",
+      "whatsapp-web.js": "^1.25.0",
+      "puppeteer-core": "^22.8.2",
+      "chrome-aws-lambda": "^10.0.0"
     },
     "devDependencies": {},
     "scripts": {
-        "start": "node main.js"
+        "prebuild": "npx puppeteer install",
+      "start": "node main.js"
     },
     "author": "",
     "license": "ISC"
-}
+  }
+  

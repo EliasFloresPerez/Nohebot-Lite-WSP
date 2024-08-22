@@ -7,21 +7,24 @@ const wsp = require('./wspAPi'); // Asegúrate de que el nombre del archivo coin
 require('dotenv').config();
 
 const puppeteer = require('puppeteer-core');
-const chrome = require('chrome-aws-lambda'); // Alternativa para entornos como AWS Lambda
+const chrome = require('chrome-aws-lambda');
 
 (async () => {
   try {
     const browser = await puppeteer.launch({
       args: chrome.args,
       executablePath: await chrome.executablePath,
-      headless: true,
+      headless: true
     });
-    // Tu lógica aquí
+    const page = await browser.newPage();
+    await page.goto('https://example.com');
+    // Aquí puedes agregar tu lógica para interactuar con la página
     await browser.close();
   } catch (error) {
     console.error('Error launching browser:', error);
   }
 })();
+
 
 // Zona horaria de Ecuador
 const ecuadorTz = 'America/Guayaquil';
