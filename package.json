@@ -6,7 +6,8 @@
     "dependencies": {
       "dotenv": "^10.0.0",
       "axios": "^1.4.0",
-      "moment-timezone": "^0.5.40"
+      "moment-timezone": "^0.5.40",
+      "node-schedule": "^2.1.0"
     },
     "devDependencies": {},
     "scripts": {
