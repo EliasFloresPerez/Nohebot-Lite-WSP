@@ -27,6 +27,20 @@ const chrome = require('chrome-aws-lambda');
 })();
 */
 
+const express = require('express'); // Asegúrate de tener Express si usas este ejemplo
+const app = express();
+
+const PORT = process.env.PORT || 3000; // Usa el puerto proporcionado por Render o 3000 por defecto
+
+app.get('/', (req, res) => {
+    res.send('¡Hola mundo!');
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+});
+
+
 // Zona horaria de Ecuador
 const ecuadorTz = 'America/Guayaquil';
 
@@ -139,7 +153,15 @@ async function notificarTareasSemana() {
     
 }
 
-
+// Programar el envío del mensaje personal cada minuto
+schedule.scheduleJob('* * * * *', async () => {
+    try {
+        console.log("Enviando mensaje personal...");
+        await wsp.sendMessageToNumber(process.env.NUMEROPERSONAL, 'Mensaje automático cada minuto');
+    } catch (error) {
+        console.error('Error al enviar el mensaje personal:', error);
+    }
+});
 
 
 schedule.scheduleJob('0 0 6 * * *', notificarCambios);
