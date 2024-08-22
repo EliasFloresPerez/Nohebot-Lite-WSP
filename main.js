@@ -150,3 +150,5 @@ console.log('Hora', moment().tz(ecuadorTz).format('hh:mm a'));
 //notificarTareasSemana();
 //tareasDelDia();
 //notificarCambios();
+
+//notificarTareasSemana();
