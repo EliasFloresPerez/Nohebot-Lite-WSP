@@ -1,4 +1,4 @@
-2024/08/22-13:47:01.370 1a64 Reusing MANIFEST C:\Users\elias\OneDrive\Escritorio\APiJsUnemi\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/08/22-13:47:01.372 1a64 Recovering log #4570
-2024/08/22-13:47:01.479 1a64 Reusing old log C:\Users\elias\OneDrive\Escritorio\APiJsUnemi\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/004570.log 
-2024/08/22-13:47:03.333 4bbc Manual compaction at level-0 from '\x00P\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00Q\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/08/22-18:37:58.534 b28 Reusing MANIFEST C:\Users\elias\OneDrive\Escritorio\APiJsUnemi\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/08/22-18:37:58.536 b28 Recovering log #4803
+2024/08/22-18:37:58.576 b28 Reusing old log C:\Users\elias\OneDrive\Escritorio\APiJsUnemi\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/004803.log 
+2024/08/22-18:38:00.670 43e0 Manual compaction at level-0 from '\x00T\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00U\x00\x00\x00' @ 0 : 0; will stop at (end)

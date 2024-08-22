@@ -1,45 +1,17 @@
 const fs = require('fs');
 const moment = require('moment-timezone');
-const schedule = require('node-schedule');
+const express = require('express');
+const cors = require('cors');  // Importa el middleware cors
 const gt = require('./getTareas');
 const fa = require('./funcionesAlertas');
-const wsp = require('./wspAPi'); // Asegúrate de que el nombre del archivo coincida
+const wsp = require('./wspAPi');
 require('dotenv').config();
 
-/*
-const puppeteer = require('puppeteer-core');
-const chrome = require('chrome-aws-lambda');
-
-(async () => {
-  try {
-    const browser = await puppeteer.launch({
-      args: chrome.args,
-      executablePath: await chrome.executablePath,
-      headless: true
-    });
-    const page = await browser.newPage();
-    await page.goto('https://example.com');
-    // Aquí puedes agregar tu lógica para interactuar con la página
-    await browser.close();
-  } catch (error) {
-    console.error('Error launching browser:', error);
-  }
-})();
-*/
-
-const express = require('express'); // Asegúrate de tener Express si usas este ejemplo
 const app = express();
-
 const PORT = process.env.PORT || 3000; // Usa el puerto proporcionado por Render o 3000 por defecto
 
-app.get('/', (req, res) => {
-    res.send('¡Hola mundo!');
-});
-
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
-
+// Habilitar CORS para todos los orígenes
+app.use(cors());
 
 // Zona horaria de Ecuador
 const ecuadorTz = 'America/Guayaquil';
@@ -47,8 +19,8 @@ const ecuadorTz = 'America/Guayaquil';
 // Lista de nombres de grupos
 const listaDeGrupos = [
     'Grupo de 9no // Los amantes de jim',
-    '9no Semestre TIC⚡',
-    'TICS 9no semestre C2 💻'
+    //'9no Semestre TIC⚡',
+    //'TICS 9no semestre C2 💻'
 ];
 
 // Función para enviar mensajes a la lista de grupos
@@ -101,7 +73,7 @@ async function tareasDelDia() {
         let tareasHoy = false;
         let tareasSemana = false;
 
-        if (hoy.day() === 1) {
+        if (hoy.day() === 1) { // Si es lunes
             tareasSemana = fa.tareasProximaSemana(tareas);
         }
 
@@ -124,13 +96,8 @@ async function tareasDelDia() {
     }
 }
 
-
 // Función para manejar la lógica de la notificación semanal
 async function notificarTareasSemana() {
-    
-    const ahora = moment().tz(ecuadorTz).startOf('day');
-    
-    
     console.log("Notificación de tareas de la semana iniciada");
 
     try {
@@ -142,7 +109,6 @@ async function notificarTareasSemana() {
         if (tareasSemana) {
             console.log('Enviada tarea de la semana');
             await enviarMensajeAGrupos(tareasSemana);
-        
         }
 
         console.log("Notificación de tareas de la semana terminada");
@@ -150,54 +116,31 @@ async function notificarTareasSemana() {
     } catch (error) {
         console.error('Error en la notificación de tareas de la semana:', error);
     }
-    
 }
 
-// Programar el envío del mensaje personal cada minuto
-schedule.scheduleJob('* * * * *', async () => {
-    try {
-        console.log("Enviando mensaje personal...");
-        await wsp.sendMessageToNumber(process.env.NUMEROPERSONAL, 'Mensaje automático cada minuto');
-    } catch (error) {
-        console.error('Error al enviar el mensaje personal:', error);
-    }
+// Rutas para los endpoints de la API
+app.get('/', (req, res) => {
+    res.send('¡Hola mundo!');
+});
+
+app.get('/notificar-cambios', async (req, res) => {
+    await notificarCambios();
+    res.send('Notificación de cambios ejecutada');
+});
+
+app.get('/tareas-hoy', async (req, res) => {
+    await tareasDelDia();
+    res.send('Tareas del día ejecutadas');
+});
+
+app.get('/tareas-semana', async (req, res) => {
+    await notificarTareasSemana();
+    res.send('Notificación de tareas de la semana ejecutada');
 });
 
 
-schedule.scheduleJob('0 0 6 * * *', notificarCambios);
 
-schedule.scheduleJob('0 0 10 * * *', notificarCambios);
-
-schedule.scheduleJob('0 0 12 * * *', notificarCambios);
-
-schedule.scheduleJob('0 0 16 * * *', notificarCambios);
-
-schedule.scheduleJob('0 0 22 * * *', notificarCambios);
-
-
-// Programar notificación de tareas del día a las 7:00 AM y 7:00 PM todos los días
-schedule.scheduleJob('0 0 7 * * *', tareasDelDia); // 7:00 AM todos los días
-schedule.scheduleJob('0 0 19 * * *', tareasDelDia); // 7:00 PM todos los días
-
-//Notificacion los lunes a las 7am
-schedule.scheduleJob('0 0 7 * * 1', notificarTareasSemana);
-
-
-console.log('Programa iniciado y configurado');
-
-
-
-console.log('\n\nFecha', moment().tz(ecuadorTz).format('dddd DD [de] MMMM [del] YYYY'));
-console.log('Hora', moment().tz(ecuadorTz).format('hh:mm a'));
-
-
-
-//Enviarme un mensaje a mi
-wsp.sendMessageToNumber(process.env.NUMEROPERSONAL, 'Bot prendido');
-
-
-//notificarTareasSemana();
-//tareasDelDia();
-//notificarCambios();
-
-//notificarTareasSemana();
+// Iniciar el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
+});

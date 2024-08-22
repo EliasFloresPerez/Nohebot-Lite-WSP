@@ -61,7 +61,7 @@ function tareasProximaSemana(diccionario) {
             const tareaFecha = moment.unix(diccionario[materia][tarea]).tz(ecuadorTz).startOf('day');
             const diasParaTarea = tareaFecha.diff(hoy, 'days');
 
-            if (diasParaTarea <= 7) {
+            if (diasParaTarea <= 7 && diasParaTarea >= 0) {
                 bandera = true;
                 tareasProximos7Dias[tarea] = diccionario[materia][tarea];
                 mensajeFinal += `- *${nombreTarea}* de *${nombreMateria}* : ${epochToDate(diccionario[materia][tarea])}\n\n`;
