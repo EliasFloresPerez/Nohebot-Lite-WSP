@@ -6,19 +6,22 @@ const fa = require('./funcionesAlertas');
 const wsp = require('./wspAPi'); // Asegúrate de que el nombre del archivo coincida
 require('dotenv').config();
 
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
+const chrome = require('chrome-aws-lambda'); // Alternativa para entornos como AWS Lambda
 
 (async () => {
-  const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    headless: true
-  });
-  const page = await browser.newPage();
-  await page.goto('https://example.com');
-  await browser.close();
+  try {
+    const browser = await puppeteer.launch({
+      args: chrome.args,
+      executablePath: await chrome.executablePath,
+      headless: true,
+    });
+    // Tu lógica aquí
+    await browser.close();
+  } catch (error) {
+    console.error('Error launching browser:', error);
+  }
 })();
-
-
 
 // Zona horaria de Ecuador
 const ecuadorTz = 'America/Guayaquil';
