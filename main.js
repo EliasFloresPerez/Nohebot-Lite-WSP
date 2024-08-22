@@ -4,6 +4,8 @@ const schedule = require('node-schedule');
 const gt = require('./getTareas');
 const fa = require('./funcionesAlertas');
 const wsp = require('./wspAPi'); // Asegúrate de que el nombre del archivo coincida
+require('dotenv').config();
+
 
 // Zona horaria de Ecuador
 const ecuadorTz = 'America/Guayaquil';
@@ -145,6 +147,11 @@ console.log('Programa iniciado y configurado');
 
 console.log('\n\nFecha', moment().tz(ecuadorTz).format('dddd DD [de] MMMM [del] YYYY'));
 console.log('Hora', moment().tz(ecuadorTz).format('hh:mm a'));
+
+
+
+//Enviarme un mensaje a mi
+wsp.sendMessageToNumber(process.env.NUMEROPERSONAL, 'Bot prendido');
 
 
 //notificarTareasSemana();

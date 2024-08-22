@@ -61,8 +61,21 @@ async function sendMessageToGroup(groupName, message) {
     }
 }
 
+// Función para enviar un mensaje a un número específico
+async function sendMessageToNumber(number, message) {
+    try {
+        await waitForClientReady(); // Espera a que el cliente esté listo
+        const chatId = `${number}@c.us`; // Formato de número de WhatsApp
+        await client.sendMessage(chatId, message);
+        console.log(`Mensaje enviado al número: ${number}`);
+    } catch (error) {
+        console.error('Error al enviar el mensaje:', error);
+    }
+}
+
 // Exporta las funciones y el cliente
 module.exports = {
     sendMessageToGroup,
+    sendMessageToNumber,
     waitForClientReady
 };
