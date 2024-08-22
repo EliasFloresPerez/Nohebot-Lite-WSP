@@ -15,7 +15,7 @@
     },
     "devDependencies": {},
     "scripts": {
-        "prebuild": "npx puppeteer install",
+    
       "start": "node main.js"
     },
     "author": "",
