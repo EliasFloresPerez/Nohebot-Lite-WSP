@@ -6,6 +6,7 @@ const fa = require('./funcionesAlertas');
 const wsp = require('./wspAPi'); // Asegúrate de que el nombre del archivo coincida
 require('dotenv').config();
 
+/*
 const puppeteer = require('puppeteer-core');
 const chrome = require('chrome-aws-lambda');
 
@@ -24,7 +25,7 @@ const chrome = require('chrome-aws-lambda');
     console.error('Error launching browser:', error);
   }
 })();
-
+*/
 
 // Zona horaria de Ecuador
 const ecuadorTz = 'America/Guayaquil';

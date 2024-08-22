@@ -9,9 +9,8 @@
       "moment-timezone": "^0.5.40",
       "node-schedule": "^2.1.0",
       "qrcode-terminal": "^0.12.0",
-      "whatsapp-web.js": "^1.25.0",
-      "puppeteer-core": "^22.8.2",
-      "chrome-aws-lambda": "^10.1.0"
+      "whatsapp-web.js": "^1.25.0"
+      
     },
     "devDependencies": {},
     "scripts": {
