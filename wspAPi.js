@@ -1,3 +1,4 @@
+// wsp.js
 const qrcode = require('qrcode-terminal');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
@@ -38,10 +39,6 @@ function reconnectClient() {
     client.initialize();
 }
 
-// Inicializa el cliente
-console.log('Esperando a que el cliente esté listo...');
-client.initialize();
-
 // Función para esperar a que el cliente esté listo
 function waitForClientReady() {
     return new Promise((resolve) => {
@@ -51,6 +48,16 @@ function waitForClientReady() {
             client.on('ready', resolve);
         }
     });
+}
+
+// Función para manejar errores del cliente
+function handleClientError(error) {
+    if (error.message.includes('Session closed')) {
+        console.log('Reintentando después de la reconexión...');
+        reconnectClient(); // Intenta reconectar al cliente si la sesión se cierra
+    } else {
+        console.error('Error al enviar el mensaje:', error);
+    }
 }
 
 // Función para enviar mensaje a un grupo
@@ -67,12 +74,7 @@ async function sendMessageToGroup(groupName, message) {
             console.log('Grupo no encontrado.');
         }
     } catch (error) {
-        if (error.message.includes('Session closed')) {
-            console.log('Reintentando después de la reconexión...');
-            reconnectClient(); // Intenta reconectar al cliente si la sesión se cierra
-        } else {
-            console.error('Error al enviar el mensaje:', error);
-        }
+        handleClientError(error);
     }
 }
 
@@ -84,16 +86,14 @@ async function sendMessageToNumber(number, message) {
         await client.sendMessage(chatId, message);
         console.log(`Mensaje enviado al número: ${number}`);
     } catch (error) {
-        if (error.message.includes('Session closed')) {
-            console.log('Reintentando después de la reconexión...');
-            reconnectClient(); // Intenta reconectar al cliente si la sesión se cierra
-        } else {
-            console.error('Error al enviar el mensaje:', error);
-        }
+        handleClientError(error);
     }
 }
 
-// Exporta las funciones y el cliente
+// Inicializa el cliente
+console.log('Esperando a que el cliente esté listo...');
+client.initialize();
+
 module.exports = {
     sendMessageToGroup,
     sendMessageToNumber,

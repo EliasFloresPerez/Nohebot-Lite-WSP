@@ -1,14 +1,16 @@
+// main.js
 const fs = require('fs');
 const moment = require('moment-timezone');
 const express = require('express');
-const cors = require('cors');  // Importa el middleware cors
+const cors = require('cors');
 const gt = require('./getTareas');
 const fa = require('./funcionesAlertas');
 const wsp = require('./wspAPi');
+
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Usa el puerto proporcionado por Render o 3000 por defecto
+const PORT = process.env.PORT || 3000;
 
 // Habilitar CORS para todos los orígenes
 app.use(cors());
@@ -137,8 +139,6 @@ app.get('/tareas-semana', async (req, res) => {
     await notificarTareasSemana();
     res.send('Notificación de tareas de la semana ejecutada');
 });
-
-
 
 // Iniciar el servidor
 app.listen(PORT, () => {
