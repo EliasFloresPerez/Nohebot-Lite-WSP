@@ -1,3 +1,6 @@
-2024/08/22-21:36:07.716 59b4 Reusing MANIFEST C:\Users\elias\OneDrive\Escritorio\APiJsUnemi\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2024/08/22-21:36:07.717 59b4 Recovering log #3
-2024/08/22-21:36:07.717 59b4 Reusing old log C:\Users\elias\OneDrive\Escritorio\APiJsUnemi\.wwebjs_auth\session\Default\Local Storage\leveldb/000003.log 
+2024/08/23-11:36:38.023 58ac Reusing MANIFEST C:\Users\elias\OneDrive\Escritorio\APiJsUnemi\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2024/08/23-11:36:38.023 58ac Recovering log #4
+2024/08/23-11:36:38.024 58ac Reusing old log C:\Users\elias\OneDrive\Escritorio\APiJsUnemi\.wwebjs_auth\session\Default\Local Storage\leveldb/000004.log 
+2024/08/23-11:38:38.591 14d8 Level-0 table #7: started
+2024/08/23-11:38:38.598 14d8 Level-0 table #7: 14193 bytes OK
+2024/08/23-11:38:38.599 14d8 Delete type=0 #4

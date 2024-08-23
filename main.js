@@ -140,6 +140,8 @@ app.get('/tareas-semana', async (req, res) => {
     res.send('Notificación de tareas de la semana ejecutada');
 });
 
+
+wsp.sendMessageToNumber('593995966029', 'Hola!');
 // Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);

@@ -66,7 +66,7 @@ async function sendMessageToGroup(groupName, message) {
         await waitForClientReady(); // Asegúrate de que el cliente esté listo
         const chats = await client.getChats();
         const groupChat = chats.find((chat) => chat.isGroup && chat.name === groupName);
-
+        console.log(message, groupChat);   
         if (groupChat) {
             await client.sendMessage(groupChat.id._serialized, message);
             console.log(`Mensaje enviado al grupo: ${groupChat.name}`);
@@ -91,7 +91,7 @@ async function sendMessageToNumber(number, message) {
 }
 
 // Inicializa el cliente
-console.log('Esperando a que el cliente esté listo...');
+//console.log('Esperando a que el cliente esté listo...');
 client.initialize();
 
 module.exports = {
